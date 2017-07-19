@@ -4,8 +4,26 @@ $(function () {
   const photoUrl = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='
   const keyword = ''
   const apiKey = '&key=AIzaSyAac5L-P1iKuBTPtHBmsv_awlqI8U8iuLs'
-  const $addBttn = $('.addBttn')
   var $placeList = $('.placeList')
+
+  const $newUserForm = $('#newUserForm')
+  $newUserForm.on('submit', function (e) {
+    e.preventDefault()
+
+    $formData = $(this).serializeArray()
+
+    var newUser = {
+      user: {
+        name: $formData[0].value,
+        email: $formData[1].value,
+        password: $formData[2].value
+      }
+    }
+
+    $.post('/users', newUser, 'json').done(function(data) {
+      
+    })
+  })
 
   var $body = $('body')
   $(document).on({
@@ -26,7 +44,7 @@ $(function () {
     // send the ajax to our own server
     // $.post(url, object)
     $.post('/places', newPlace).done(function (data) {
-      if(data.status === 200) {
+      if (data.status === 200) {
         alert('Hurray! ' + data.message)
       }
     })
@@ -41,6 +59,7 @@ $(function () {
     var finalUrl = `https://crossorigin.me/${apiurl}${qString}${apiKey}`
     ajaxTextSearch(finalUrl)
   })
+
   function ajaxTextSearch (finalUrl, keyword) {
     $placeList.empty()
 

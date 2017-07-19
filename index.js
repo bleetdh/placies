@@ -24,7 +24,7 @@ mongoose.connect(url, {
 
 // set middleware
 app.use(express.static('public'))
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method')) // method must be before bodyparser
 app.use(bodyParser.json()) // listen to ajax request - json post
 app.use(bodyParser.urlencoded({
   extended: true
@@ -32,18 +32,19 @@ app.use(bodyParser.urlencoded({
 
 // engine
 app.engine('handlebars', exphbs({
-  defaultLayout: 'main',
+  defaultLayout: 'main'
   // partialsDir: 'views/partials'
 }))
 app.set('view engine', 'handlebars')
 
 // set up all files that the proj needs to run
 const placesRoute = require('./routes/placeRoute')
+const usersRoute = require('./routes/userRoute')
 
 // set up the routes
 // no requring after this line!
 app.use('/places', placesRoute)
-
+app.use('/users', usersRoute)
 // set up homepage
 app.get('/', function (req, res) {
   res.render('home')
