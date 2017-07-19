@@ -26,7 +26,7 @@ mongoose.connect(url, {
 app.use(express.static('public'))
 // engine
 app.engine('handlebars', exphbs({
-  // defaultLayout: 'main',
+  defaultLayout: 'main',
   // partialsDir: 'views/partials'
 }))
 app.set('view engine', 'handlebars')
@@ -38,6 +38,10 @@ const placesRoute = require('./routes/placeRoute')
 // no requring after this line!
 app.use('/places', placesRoute)
 
+// set up homepage
+app.get('/', function (req, res) {
+  res.render('home')
+})
 // listen, opening the port
 const port = 5000
 app.listen(port, function () {

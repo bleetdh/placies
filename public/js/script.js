@@ -3,35 +3,59 @@ $(function () {
   const apiurl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
   const photoUrl = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='
   const keyword = ''
-  const apiKey = '&key=AIzaSyCWSL8hBID-8YVZeCWt1MO_zFub8ngXoio'
+  const apiKey = '&key=AIzaSyAac5L-P1iKuBTPtHBmsv_awlqI8U8iuLs'
+  const $addBttn = $('.addBttn')
+  var $placeList = $('.placeList')
+
+  var $body = $('body')
+  $(document).on({
+    ajaxStart: function () { $body.addClass('loading') },
+    ajaxStop: function () { $body.removeClass('loading') }
+  })
+
+  $placeList.on('click', '.addBttn', function (e) {
+    e.preventDefault()
+
+    const theBttn = $(this)
+
+    var newPlace = {
+      name: theBttn.data('name'),
+      address: theBttn.data('address'),
+      reference: theBttn.data('reference')
+    }
+
+    console.log(newPlace)
+  })
 
   $placeSearch.on('submit', function (e) {
     e.preventDefault()
     var keywordObj = $(this).serializeArray()
     var $textChange = $('#textChange')
-    // var $keyWord = $('input')
-    // console.log($textChange.text())
-    // console.log($keyWord.value)
-    $textChange.text(keywordObj[0].value)
-    console.log(keywordObj[0].value)
+    $textChange.text(`Results for ${keywordObj[0].value}`)
     var qString = `query=${keywordObj[0].value}`
     var finalUrl = `https://crossorigin.me/${apiurl}${qString}${apiKey}`
-
-    var $placeList = $('.placeList')
+    ajaxTextSearch(finalUrl)
+  })
+  function ajaxTextSearch (finalUrl, keyword) {
     $placeList.empty()
 
     $.get(finalUrl).done(function (data) {
       var placesArr = data.results
+
       for (var i = 0; i < placesArr.length; i++) {
         var $newLi = $('<li>')
-        var $newImg = $('<img>')
+        var $h2 = $('<h2>')
+        $h2.text(placesArr[i].name)
         var $newBr = $('<br>')
-        var $newButton = $('<button>')
-        var $new2Br = $('<br>')
-        $newButton.text('Add')
-        $newLi.append(placesArr[i].name)
-        $placeList.append($newLi)
-        $newLi.append($newBr)
+        var $addBttn = $(`<button
+          class='addBttn'
+          data-name="${placesArr[i].name}"
+          data-address="${placesArr[i].formatted_address}"
+          data-reference="${placesArr[i].photos[0].photo_reference}">add</button>`)
+        var $newP = $('<p>')
+        $newP.text(placesArr[i].formatted_address)
+        $newLi.append($h2, $newP)
+        var $newImg = $('<img>')
         if (placesArr[i].photos) {
           var photoRef = placesArr[i].photos[0].photo_reference
           var photoFinalUrl = `${photoUrl}${photoRef}${apiKey}`
@@ -41,14 +65,9 @@ $(function () {
           })
           $newLi.append($newImg)
         }
-        $newLi.append($new2Br)
-        $newLi.append($newButton)
+        $newLi.append($newBr, $addBttn)
+        $placeList.append($newLi)
       }
     })
-  })
-  var $body = $('body')
-  $(document).on({
-    ajaxStart: function () { $body.addClass('loading') },
-    ajaxStop: function () { $body.removeClass('loading') }
-  })
+  }
 })

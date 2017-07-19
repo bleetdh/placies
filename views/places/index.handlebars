@@ -1,28 +1,12 @@
-<!DOCTYPE html>
-<html>
+<a href='/'>Home</a>
+<a href='./places'>Search for places</a>
+<h2 id="textChange">Search for places</h2>
 
-<head>
-  <meta charset="utf-8">
-  <title>Search Place</title>
-  <link rel="stylesheet" href="./css/style.css">
-</head>
-
-<body>
-  <h1> Search for <span id="textChange">places</span> </h1>
-
-  <form id="placeSearch" action="#" method="post">
-    <label for="keyword">Search</label>
-    <input type="text" name="keyword" id="keyword">
-    {{!-- <input type="submit" value="Search"> --}}
-    <button>Search</button>
-  </form>
-  <ul class='placeList'>
-  </ul>
-  <div class="modal">
-    <!-- Place at bottom of page -->
-  </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
-  <script src="js/script.js" charset="utf-8"></script>
-</body>
-
-</html>
+<form id="placeSearch" action="#" method="post">
+  <label for="keyword">Search</label>
+  <input type="text" name="keyword" id="keyword">
+  {{!-- <input type="submit" value="Search"> --}}
+  <button>Search</button>
+</form>
+<ul class='placeList'>
+</ul>
