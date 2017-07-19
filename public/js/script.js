@@ -23,8 +23,13 @@ $(function () {
       address: theBttn.data('address'),
       reference: theBttn.data('reference')
     }
-
-    console.log(newPlace)
+    // send the ajax to our own server
+    // $.post(url, object)
+    $.post('/places', newPlace).done(function (data) {
+      if(data.status === 200) {
+        alert('Hurray! ' + data.message)
+      }
+    })
   })
 
   $placeSearch.on('submit', function (e) {

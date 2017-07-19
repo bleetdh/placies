@@ -1,8 +1,13 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', function(req, res){
+const placesController = require('../controllers/places_controller')
+
+router.get('/', function (req, res) {
   res.render('places/index')
 })
+
+// implementation/ calling the fn
+router.post('/', placesController.create)
 
 module.exports = router

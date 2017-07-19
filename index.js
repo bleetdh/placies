@@ -24,6 +24,12 @@ mongoose.connect(url, {
 
 // set middleware
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
+app.use(bodyParser.json()) // listen to ajax request - json post
+app.use(bodyParser.urlencoded({
+  extended: true
+})) // listen to form data submission
+
 // engine
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
