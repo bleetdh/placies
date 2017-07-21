@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
   res.render('home')
 })
 // listen, opening the port
-const port = 5000
+const port = 4000
 app.listen(port, function () {
   console.log('express is running on ' + port)
 })

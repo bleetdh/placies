@@ -10,7 +10,11 @@ const userSchema = new Schema({
     type: String,
     required: [true,'WRONG EMAIL']
   },
-  password: String
+  password: String,
+  places: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Place'
+  }]
 })
 
 const User = mongoose.model('User', userSchema)

@@ -1,15 +1,21 @@
 <h2>Creating new users</h2>
 
 <form action="/users" method="post" id='newUserForm'>
-  <label>
+  <label> User:
     <input type="text" name="user[name]" placeholder="Submit your name">
   </label>
-  <label>
+  <label>Email:
     <input type="text" name="user[email]" placeholder="Submit your email">
   </label>
-  <label>
-    <input type="text" name="user[password]" placeholder="Submit your password">
+  <label> Password:
+    <input type="password" name="user[password]" placeholder="Submit your password">
   </label>
-
+  <select>
+    {{#each user.places as |place|}}
+      <option>{{ place.name }}</option>
+    {{else}}
+      <option>no place</option>
+    {{/each}}
+  </select>
   <button id='createButton'>Submit</button>
 </form>

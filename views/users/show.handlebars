@@ -1,0 +1,15 @@
+<h1>
+  User page for: {{ user.name }}
+</h1>
+<small>email: {{ user.email }}</small>
+
+<br>
+<br>
+
+<select multiple>
+  {{#each user.places as |place|}}
+    <option>{{ place.name }}</option>
+  {{else}}
+    <option>no place</option>
+  {{/each}}
+</select>

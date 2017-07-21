@@ -10,7 +10,7 @@ $(function () {
   $newUserForm.on('submit', function (e) {
     e.preventDefault()
 
-    $formData = $(this).serializeArray()
+    var $formData = $(this).serializeArray()
 
     var newUser = {
       user: {
@@ -20,8 +20,8 @@ $(function () {
       }
     }
 
-    $.post('/users', newUser, 'json').done(function(data) {
-      
+    $.post('/users', newUser, 'json').done(function (data) {
+
     })
   })
 
