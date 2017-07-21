@@ -3,7 +3,7 @@ $(function () {
   const apiurl = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
   const photoUrl = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='
   const keyword = ''
-  const apiKey = '&key=AIzaSyAac5L-P1iKuBTPtHBmsv_awlqI8U8iuLs'
+  const apiKey = `&key=${process.env.GOOGLE_PLACES_KEY}`
   var $placeList = $('.placeList')
 
   const $newUserForm = $('#newUserForm')
@@ -19,7 +19,6 @@ $(function () {
         password: $formData[2].value
       }
     }
-
     $.post('/users', newUser, 'json').done(function (data) {
 
     })

@@ -1,3 +1,5 @@
+// before everything else, load the .env file
+require('dotenv').config()
 // express
 const express = require('express')
 const app = express()
@@ -50,7 +52,7 @@ app.get('/', function (req, res) {
   res.render('home')
 })
 // listen, opening the port
-const port = 4000
+const port = process.env.PORT || 4000
 app.listen(port, function () {
   console.log('express is running on ' + port)
 })

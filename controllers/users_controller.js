@@ -1,6 +1,8 @@
 const User = require('../models/User')
 // bcrypt
 const bcrypt = require('bcrypt')
+// request
+const request = require('request')
 
 const Place = require('../models/Place')
 // logic
@@ -20,9 +22,16 @@ function show (req, res) {
   })
 }
 
-// function showPlace (req, res) {
-//   Place.find({})
-// }
+function showPlace (req, res) {
+  // Place.find({}, function (err, allPlaces) {
+  //   if (err) res.send(err)
+  //   // res.send(theUser)
+  //   res.render('users/new', {
+  //     places: allPlaces
+  //   })
+  // })
+
+}
 
 function create (req, res) {
 //   bcrypt.hash(req.body.password, 10, function (err, hash) {
@@ -36,6 +45,7 @@ function create (req, res) {
 //     })
 //   })
   // use req to create new database
+  console.log(req.body)
   User.create(req.body.user, function (err, newUser) {
     if (err) {
       // flow if user is invalid
@@ -57,6 +67,6 @@ function create (req, res) {
 
 module.exports = {
   create,
-  // showPlace,
+  showPlace,
   show
 }

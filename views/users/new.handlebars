@@ -10,12 +10,14 @@
   <label> Password:
     <input type="password" name="user[password]" placeholder="Submit your password">
   </label>
-  <select>
-    {{#each user.places as |place|}}
-      <option>{{ place.name }}</option>
-    {{else}}
-      <option>no place</option>
-    {{/each}}
-  </select>
+  <label> Place
+    <select name="place[id]">
+      {{#each places as |place|}}
+        <option value="{{ place.id }}">{{ place.name }}</option>
+      {{else}}
+        <option>no place</option>
+      {{/each}}
+    </select>
+  </label>
   <button id='createButton'>Submit</button>
 </form>
